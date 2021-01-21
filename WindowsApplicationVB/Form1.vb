@@ -20,12 +20,17 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles searchButton.Click
         Dim sqlstr As String
-        sqlstr = "select * from test_table where s_name like '%" & TextBoxName.Text & "%'"
+        sqlstr = "select * from test_table where s_name like '%" & facilityTextBox.Text & "%'"
         Me.Adapter = New SqlDataAdapter(sqlstr, cnn)
         dtable.Clear()
         Me.Adapter.Fill(dtable)
-        DataGridView1.DataSource = New DataView(dtable)
+        resultGridView.DataSource = New DataView(dtable)
+
+    End Sub
+
+    Private Sub DataGridView1_MouseClick(sender As Object, e As MouseEventArgs) Handles resultGridView.MouseClick
+        TextBoxC.Text = ((Integer.Parse(TextBoxA.Text()) + Integer.Parse(TextBoxB.Text())).ToString())
     End Sub
 End Class

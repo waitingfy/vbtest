@@ -30,16 +30,17 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TextBoxC = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.resultGridView = New System.Windows.Forms.DataGridView()
         Me.TestBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TestDataSet = New WindowsApplicationVB.testDataSet()
         Me.TestTableAdapter = New WindowsApplicationVB.testDataSetTableAdapters.testTableAdapter()
-        Me.TextBoxName = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.facilityTextBox = New System.Windows.Forms.TextBox()
+        Me.searchButton = New System.Windows.Forms.Button()
         Me.Test_dbDataSet = New WindowsApplicationVB.test_dbDataSet()
         Me.TesttableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Test_tableTableAdapter = New WindowsApplicationVB.test_dbDataSetTableAdapters.test_tableTableAdapter()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cityComboBox = New System.Windows.Forms.ComboBox()
+        CType(Me.resultGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TestBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TestDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Test_dbDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -103,14 +104,14 @@ Partial Class Form1
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "C"
         '
-        'DataGridView1
+        'resultGridView
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(115, 354)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 30
-        Me.DataGridView1.Size = New System.Drawing.Size(433, 150)
-        Me.DataGridView1.TabIndex = 7
+        Me.resultGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.resultGridView.Location = New System.Drawing.Point(141, 406)
+        Me.resultGridView.Name = "resultGridView"
+        Me.resultGridView.RowTemplate.Height = 30
+        Me.resultGridView.Size = New System.Drawing.Size(433, 150)
+        Me.resultGridView.TabIndex = 7
         '
         'TestBindingSource
         '
@@ -126,21 +127,21 @@ Partial Class Form1
         '
         Me.TestTableAdapter.ClearBeforeFill = True
         '
-        'TextBoxName
+        'facilityTextBox
         '
-        Me.TextBoxName.Location = New System.Drawing.Point(180, 305)
-        Me.TextBoxName.Name = "TextBoxName"
-        Me.TextBoxName.Size = New System.Drawing.Size(184, 28)
-        Me.TextBoxName.TabIndex = 8
+        Me.facilityTextBox.Location = New System.Drawing.Point(141, 300)
+        Me.facilityTextBox.Name = "facilityTextBox"
+        Me.facilityTextBox.Size = New System.Drawing.Size(184, 28)
+        Me.facilityTextBox.TabIndex = 8
         '
-        'Button1
+        'searchButton
         '
-        Me.Button1.Location = New System.Drawing.Point(406, 305)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(180, 33)
-        Me.Button1.TabIndex = 9
-        Me.Button1.Text = "Search"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.searchButton.Location = New System.Drawing.Point(141, 353)
+        Me.searchButton.Name = "searchButton"
+        Me.searchButton.Size = New System.Drawing.Size(180, 33)
+        Me.searchButton.TabIndex = 9
+        Me.searchButton.Text = "Search"
+        Me.searchButton.UseVisualStyleBackColor = True
         '
         'Test_dbDataSet
         '
@@ -156,14 +157,23 @@ Partial Class Form1
         '
         Me.Test_tableTableAdapter.ClearBeforeFill = True
         '
+        'cityComboBox
+        '
+        Me.cityComboBox.FormattingEnabled = True
+        Me.cityComboBox.Location = New System.Drawing.Point(332, 300)
+        Me.cityComboBox.Name = "cityComboBox"
+        Me.cityComboBox.Size = New System.Drawing.Size(195, 26)
+        Me.cityComboBox.TabIndex = 10
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(904, 568)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBoxName)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.cityComboBox)
+        Me.Controls.Add(Me.searchButton)
+        Me.Controls.Add(Me.facilityTextBox)
+        Me.Controls.Add(Me.resultGridView)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TextBoxC)
         Me.Controls.Add(Me.Label2)
@@ -173,7 +183,7 @@ Partial Class Form1
         Me.Controls.Add(Me.ButtonAdd)
         Me.Name = "Form1"
         Me.Text = "Form1"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.resultGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TestBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TestDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Test_dbDataSet, System.ComponentModel.ISupportInitialize).EndInit()
@@ -189,14 +199,15 @@ Partial Class Form1
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents TextBoxC As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents resultGridView As System.Windows.Forms.DataGridView
     Friend WithEvents TestDataSet As WindowsApplicationVB.testDataSet
     Friend WithEvents TestBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents TestTableAdapter As WindowsApplicationVB.testDataSetTableAdapters.testTableAdapter
-    Friend WithEvents TextBoxName As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents facilityTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents searchButton As System.Windows.Forms.Button
     Friend WithEvents Test_dbDataSet As WindowsApplicationVB.test_dbDataSet
     Friend WithEvents TesttableBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Test_tableTableAdapter As WindowsApplicationVB.test_dbDataSetTableAdapters.test_tableTableAdapter
+    Friend WithEvents cityComboBox As System.Windows.Forms.ComboBox
 
 End Class
