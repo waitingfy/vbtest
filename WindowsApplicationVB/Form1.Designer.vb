@@ -110,7 +110,7 @@ Partial Class Form1
         Me.resultGridView.Location = New System.Drawing.Point(141, 406)
         Me.resultGridView.Name = "resultGridView"
         Me.resultGridView.RowTemplate.Height = 30
-        Me.resultGridView.Size = New System.Drawing.Size(433, 150)
+        Me.resultGridView.Size = New System.Drawing.Size(722, 150)
         Me.resultGridView.TabIndex = 7
         '
         'TestBindingSource

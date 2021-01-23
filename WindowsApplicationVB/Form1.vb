@@ -3,34 +3,51 @@
 Public Class Form1
     Dim cnnstr As String = "Initial Catalog=test_db;Data Source=DESKTOP-0TQBVUG\SQLEXPRESS;Integrated Security=True;"
     Dim cnn As New SqlConnection(cnnstr)
-    Dim Adapter As SqlDataAdapter
-    Dim dtable As New DataTable
-    Dim dt As New DataSet
+    'Dim Adapter As SqlDataAdapter
+    'Dim dtable As New DataTable
+    'Dim dt As New DataSet
     Private Sub ButtonAdd_Click(sender As Object, e As EventArgs) Handles ButtonAdd.Click
         TextBoxC.Text = ((Integer.Parse(TextBoxA.Text()) + Integer.Parse(TextBoxB.Text())).ToString())
 
 
     End Sub
 
+    Private Function FillCombo() As Integer
+        Dim sqlstr As String
+        Dim Adapter As SqlDataAdapter
+        Dim dtable As New DataTable
+        sqlstr = "select CITY from facilit where FACILITY_NAME like '%" & facilityTextBox.Text & "%' group by CITY"
+        Adapter = New SqlDataAdapter(sqlstr, cnn)
+        dtable.Clear()
+        Adapter.Fill(dtable)
+        cityComboBox.DataSource = New DataView(dtable)
+        cityComboBox.DisplayMember = "CITY"
+        Return 1
+    End Function
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO:  这行代码将数据加载到表“Test_dbDataSet.test_table”中。您可以根据需要移动或删除它。
-        Me.Test_tableTableAdapter.Fill(Me.Test_dbDataSet.test_table)
-        'TODO:  这行代码将数据加载到表“TestDataSet.test”中。您可以根据需要移动或删除它。
-        'Me.TestTableAdapter.Fill(Me.TestDataSet.test)
+        FillCombo()
+
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles searchButton.Click
         Dim sqlstr As String
-        sqlstr = "select * from test_table where s_name like '%" & facilityTextBox.Text & "%'"
-        Me.Adapter = New SqlDataAdapter(sqlstr, cnn)
+        Dim dtable As New DataTable
+        sqlstr = "select FACILITY_NAME, ADDRESS_1+' '+ADDRESS_2 as 'ADDRESS', DESCRIPTION_1 as 'SERVICE TYPE' from facilit where FACILITY_NAME like '%" & facilityTextBox.Text & "%' and CITY ='" & cityComboBox.Text & "'"
+        Dim Adapter As SqlDataAdapter
+        Adapter = New SqlDataAdapter(sqlstr, cnn)
         dtable.Clear()
-        Me.Adapter.Fill(dtable)
+        Adapter.Fill(dtable)
         resultGridView.DataSource = New DataView(dtable)
 
     End Sub
 
     Private Sub DataGridView1_MouseClick(sender As Object, e As MouseEventArgs) Handles resultGridView.MouseClick
-        TextBoxC.Text = ((Integer.Parse(TextBoxA.Text()) + Integer.Parse(TextBoxB.Text())).ToString())
+
+    End Sub
+
+    Private Sub facilityTextBox_TextChanged(sender As Object, e As EventArgs) Handles facilityTextBox.TextChanged
+        FillCombo()
     End Sub
 End Class
